@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../firebase/AuthProvider";
 
 const Login = () => {
+  const {googleLogin} = useContext(AuthContext)
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-400 to-blue-500">
       <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center justify-between max-w-7xl">
@@ -61,7 +63,7 @@ const Login = () => {
               Submit
             </button>
           </form>
-          <button className="btn flex justify-center items-center text-purple-500 mt-8">Log in with Google <FaGoogle/> </button>
+          <button onClick={googleLogin} className="btn flex justify-center items-center text-purple-500 mt-8">Log in with Google <FaGoogle/> </button>
         </div>
       </div>
     </div>

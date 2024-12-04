@@ -1,29 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../firebase/AuthProvider";
 
 const Navbar = () => {
-    const user = null
+  const { user } = useContext(AuthContext);
   const links = (
     <>
-      <NavLink to='/'>
-      <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
-        Home
-      </li>
+      <NavLink to="/">
+        <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+          Home
+        </li>
       </NavLink>
-      <NavLink to='/'>
-      <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
-      All Sports Equipment
-      </li>
+      <NavLink to="/">
+        <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+          All Sports Equipment
+        </li>
       </NavLink>
-      <NavLink to='/'>
-      <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
-      Add Equipment
-      </li>
+      <NavLink to="/">
+        <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+          Add Equipment
+        </li>
       </NavLink>
-      <NavLink to='/'>
-      <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
-      My Equipment List
-      </li>
+      <NavLink to="/">
+        <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+          My Equipment List
+        </li>
       </NavLink>
     </>
   );
@@ -60,15 +61,27 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        {
-            user ? <div>
-                <img src="" alt="" />
-                <button className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">Log out</button>
-                 </div> : <div> 
-                <Link to='/login'><button className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">Login</button></Link>
-                <Link to='/register'><button className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">Register</button></Link>
-            </div>
-        }
+        {user ? (
+          <div>
+            <img src="" alt="" />
+            <button className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+              Log out
+            </button>
+          </div>
+        ) : (
+          <div>
+            <Link to="/login">
+              <button className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+                Login
+              </button>
+            </Link>
+            <Link to="/register">
+              <button className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+                Register
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
