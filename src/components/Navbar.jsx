@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../firebase/AuthProvider";
+import { Tooltip } from 'react-tooltip'
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+  console.log(user?.photoURL);
   const links = (
     <>
       <NavLink to="/">
@@ -16,7 +18,7 @@ const Navbar = () => {
           All Sports Equipment
         </li>
       </NavLink>
-      <NavLink to="/">
+      <NavLink to="/add-equipments">
         <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
           Add Equipment
         </li>
@@ -62,9 +64,20 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <div>
-            <img src="" alt="" />
-            <button className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+          <div data-tooltip-id="my-tooltip" data-tooltip-content={user?.displayName} className="flex items-center justify-center gap-2">
+            <div>
+              <div>
+                <img
+                  className="w-12 h-12 rounded-full object-cover"
+                  src={user?.photoURL}
+                />
+              </div>
+              <Tooltip id="my-tooltip" />
+            </div>
+            <button
+              onClick={logout}
+              className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium"
+            >
               Log out
             </button>
           </div>

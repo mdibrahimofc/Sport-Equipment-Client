@@ -1,12 +1,40 @@
 import React, { useContext } from "react";
-import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../firebase/AuthProvider";
+import swal from 'sweetalert';
 
 const Register = () => {
-  const { register } = useContext(AuthContext);
+  const { register, profileUpdate } = useContext(AuthContext);
   const handleRegister = event => {
-    event.preventDefaul()
+    event.preventDefault()
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/
+
+    if(!passwordValidation.test(password)){
+        return swal('Password must contain uppercase, and lowercase letters, and be at least 6 characters long.')
+    }
+    const profileInfo = {
+        displayName: name,
+        photoURL: photo,
+    }
+    console.log({email, password, name, photo});
+    register(email, password)
+    .then(res=> {
+        console.log(res.user);
+        profileUpdate(name, photo)
+        .then(res=> {
+            console.log(res);
+            swal("Registration successful")
+        })
+    })
+    .catch(err=> {
+        console.log(err);
+    }
+    )
   }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-400 to-blue-500">
@@ -30,6 +58,38 @@ const Register = () => {
           <form onSubmit={handleRegister}>
             <div className="mb-4">
               <label
+                htmlFor="name"
+                className="block text-gray-600 text-sm font-medium mb-2"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                required
+                className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-purple-300"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="photo"
+                className="block text-gray-600 text-sm font-medium mb-2"
+              >
+                photoURL
+              </label>
+              <input
+                id="photo"
+                type="text"
+                name="photo"
+                required
+                className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-purple-300"
+                placeholder="Enter your photurl"
+              />
+            </div>
+            <div className="mb-4">
+              <label
                 htmlFor="email"
                 className="block text-gray-600 text-sm font-medium mb-2"
               >
@@ -39,6 +99,7 @@ const Register = () => {
                 id="email"
                 type="email"
                 name="email"
+                required
                 className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-purple-300"
                 placeholder="Enter your email"
               />
@@ -54,6 +115,7 @@ const Register = () => {
                 id="password"
                 type="password"
                 name="password"
+                required
                 className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-purple-300"
                 placeholder="Enter your password"
               />

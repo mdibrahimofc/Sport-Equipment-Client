@@ -2,9 +2,24 @@ import React, { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../firebase/AuthProvider";
+import swal from 'sweetalert';
 
 const Login = () => {
-  const {googleLogin} = useContext(AuthContext)
+  const {googleLogin, login} = useContext(AuthContext)
+  const handleLogin = event => {
+    event.preventDefault()
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    login(email, password)
+    .then(res=> {
+        console.log(res.user);
+    })
+    .catch(err=> {
+        swal("Email or password didn't match")
+    }
+    )
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-400 to-blue-500">
       <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center justify-between max-w-7xl">
@@ -24,7 +39,7 @@ const Login = () => {
           <h2 className="text-2xl font-bold text-gray-700 mb-6">
             Member Login
           </h2>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label
                 htmlFor="email"
