@@ -7,10 +7,9 @@ export const AuthContext = createContext(null)
 const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
-        setLoading(true)
         const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
             console.log(currentUser);
             setUser(currentUser)
@@ -29,6 +28,7 @@ const AuthProvider = ({children}) => {
     }
 
     const profileUpdate = (name, photo) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, {
             displayName: name,
         photoURL: photo,
@@ -37,6 +37,7 @@ const AuthProvider = ({children}) => {
 
     const googleProvider = new GoogleAuthProvider()
     const googleLogin = () => {
+        setLoading(true)
         signInWithPopup(auth, googleProvider)
         .then ( res => {
             console.log(res.user);
@@ -48,6 +49,7 @@ const AuthProvider = ({children}) => {
     }
 
     const logout = () => {
+        setLoading(true)
         signOut(auth)
         .then(res => {
             console.log(res);
