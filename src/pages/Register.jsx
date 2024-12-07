@@ -4,7 +4,8 @@ import { AuthContext } from "../firebase/AuthProvider";
 import swal from 'sweetalert';
 
 const Register = () => {
-  const { register, profileUpdate } = useContext(AuthContext);
+  const { register, profileUpdate, setUserName, setUserEmail } = useContext(AuthContext);
+  console.log(setUserEmail, setUserName);
   const handleRegister = event => {
     event.preventDefault()
     const form = event.target;

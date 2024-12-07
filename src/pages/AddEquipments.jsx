@@ -1,19 +1,12 @@
-import React from "react";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import lottieAnimation from "../animations/lottie1.json";
-import AddEquipmentForm from "../components/AddEquipmentForm";
-// image: "",
-//     itemName: "",
-//     categoryName: "",
-//     description: "",
-//     price: "",
-//     rating: "",
-//     customization: "",
-//     processingTime: "",
-//     stockStatus: "",
-//     userEmail: "user@example.com", // Replace with logged-in user email
-//     userName: "John Doe",
+import React, { useContext } from "react";
+import { AuthContext } from "../firebase/AuthProvider";
+import swal from "sweetalert";
+import { Fade, Slide } from "react-awesome-reveal";
+
+
 const AddEquipments = () => {
+  const {user} = useContext(AuthContext)
+    console.log(user);
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -25,8 +18,24 @@ const AddEquipments = () => {
         const customization = form.customization.value;
         const processingTime =form.processingTime.value;
         const stockStatus = form.stockStatus.value;
-    console.log({photo, itemName, description, price, rating, customization, processingTime, stockStatus});
-    
+        const categoryName = form.categoryName.value;
+        const userName = form.userName.value;
+        const userEmail = form.userEmail.value;
+        const newEquipment = {photo, categoryName, itemName, description, price, rating, customization, processingTime, stockStatus, userName, userEmail};
+        fetch('http://localhost:5000/add-equipments', {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(newEquipment)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      swal("Product added successfully")
+      form.reset()
+    })
+    .catch(err=> swal("Ooopss! something wrong, products doesn't add"))
       };
   return (
     <div className="my-8">
@@ -37,41 +46,11 @@ const AddEquipments = () => {
       <p className="text-sky-400 text-center my-2 md:text-2xl font-semibold">
         Enter the Details to Add a New Sports Equipment to the Store
       </p>
-      {/* <DotLottieReact src={lottieAnimation} loop autoplay /> */}
-      {/* <div className="bg-[#F2F2F2] shadow-md p-10 md:max-w-[80%] mx-auto">
-        <p className="text-center text-xl md:text-3xl font-bold mb-4">
-          Add New Equipment
-        </p>
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
-          <label className="form-control w-full">
-            <div className="label">
-              <span className="label-text">Image URL</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Enter the image url"
-              name="image"
-              className="input input-bordered w-full"
-            />
-          </label>
-          <label className="form-control w-full">
-            <div className="label">
-              <span className="label-text">Item Name</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Enter item name"
-              name="item"
-              className="input input-bordered w-full"
-            />
-          </label>
-        </form>
-      </div> */}
-      <div className="max-w-4xl mx-auto p-6 bg-base-200 rounded-md shadow-md">
+      <div className="w-4/5 mx-auto p-6 bg-base-200 rounded-md shadow-md">
         <h1 className="text-3xl font-bold mb-4 text-center">
           Add New Equipment
         </h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Image URL */}
           <div className="form-control">
             <label className="label">
@@ -105,18 +84,13 @@ const AddEquipments = () => {
             <label className="label">
               <span className="label-text">Category Name</span>
             </label>
-            <select
+            <input
+              type="text"
               name="categoryName"
-              className="select select-bordered w-full"
+              placeholder="Enter category name"
+              className="input input-bordered w-full"
               required
-            >
-              <option disabled value="">
-                Select a category
-              </option>
-              <option>Cricket</option>
-              <option>Football</option>
-              <option>Swimming</option>
-            </select>
+            />
           </div>
 
           {/* Description */}
@@ -158,7 +132,7 @@ const AddEquipments = () => {
               <option disabled value="">
                 Select rating
               </option>
-              {[1, 2, 3, 4, 5].map((num) => (
+              {[1, 2, 3, 3.3, 3.5, 3.7, 3.9, 4, 4.2, 4.3, 4.4, 4.5, 5].map((num) => (
                 <option key={num} value={num}>
                   {num} Star{num > 1 && "s"}
                 </option>
@@ -215,10 +189,11 @@ const AddEquipments = () => {
               type="email"
               name="userEmail"
               className="input input-bordered w-full"
+              defaultValue={user?.email}
               readOnly
             />
           </div>
-          <div className="form-control">
+          <div className="form-control col-span-2">
             <label className="label">
               <span className="label-text">User Name</span>
             </label>
@@ -226,13 +201,14 @@ const AddEquipments = () => {
               type="text"
               name="userName"
               className="input input-bordered w-full"
+              defaultValue={user?.displayName}
               readOnly
             />
           </div>
 
           {/* Submit Button */}
-          <div className="form-control mt-6">
-            <input className="btn btn-primary" value={'Add Equipment'} type="submit"/>
+          <div className="form-control mt-6 col-span-2">
+            <input className="btn btn-primary hover:bg-blue-700" value={'Add Equipment'} type="submit"/>
           </div>
         </form>
       </div>
