@@ -7,6 +7,7 @@ import PrivateRoute from "../components/PrivateRoute";
 import AddEquipments from "../pages/AddEquipments";
 import Error from "../pages/Error";
 import AllEquipments from "../pages/AllEquipments";
+import MyEquipments from "../pages/MyEquipments";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
                 path: "all-sports-equipments",
                 element: <AllEquipments/>,
                 loader: ()=> fetch("http://localhost:5000/all-equipments")
+            },
+            {
+                path: "my-equipments-list",
+                element: <MyEquipments/>
             }
         ]
     }

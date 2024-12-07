@@ -51,7 +51,7 @@ const Navbar = () => {
           Add Equipment
         </li>
       </NavLink>
-      <NavLink to="/">
+      <NavLink to="/my-equipments-list">
         <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
           My Equipment List
         </li>
