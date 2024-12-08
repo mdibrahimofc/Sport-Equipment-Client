@@ -9,6 +9,7 @@ import Error from "../pages/Error";
 import AllEquipments from "../pages/AllEquipments";
 import MyEquipments from "../pages/MyEquipments";
 import UpdateEquipments from "../pages/UpdateEquipments";
+import ViewDetails from "../pages/ViewDetails";
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
                 path: "update-equipments/:id",
                 element: <PrivateRoute><UpdateEquipments/></PrivateRoute>,
                 loader: () => fetch("https://equi-sports-server-chi.vercel.app/all-equipments")
+            },
+            {
+                path: "view-details/:id",
+                element: <PrivateRoute><ViewDetails/></PrivateRoute>
             }
         ]
     }

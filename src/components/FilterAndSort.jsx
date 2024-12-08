@@ -15,8 +15,7 @@ const FilterAndSort = ({setProducts}) => {
       console.log(data);
       setProducts(data)
     })
-    }
-    if(price === "High to Low"){
+    }else{
       fetch("https://equi-sports-server-chi.vercel.app/filter/descending")
     .then(res=> res.json())
     .then(data=> {

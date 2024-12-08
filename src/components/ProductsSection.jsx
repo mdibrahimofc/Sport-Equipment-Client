@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Zoom } from "react-awesome-reveal";
+import { Link } from "react-router-dom";
 
 const ProductsSection = () => {
   const [loading, setLoading] = useState(false);
@@ -49,12 +50,12 @@ const ProductsSection = () => {
               <div className="flex items-center justify-between mt-4">
                 <span
                   className={`badge ${
-                    product.stock > 0 ? "badge-success" : "badge-error"
+                    product.stockStatus > 0 ? "badge-success" : "badge-error"
                   }`}
                 >
-                  {product.stock > 0 ? "In Stock" : "Out of Stock"}
+                  {product.stockStatus > 0 ? "In Stock" : "Out of Stock"}
                 </span>
-                <button className="btn btn-primary">View Details</button>
+                <Link to={`/view-details/${product._id}`}><button className="btn btn-primary">View Details</button></Link>
               </div>
             </div>
             </Zoom>

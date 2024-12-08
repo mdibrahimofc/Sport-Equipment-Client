@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
 const EquipmentDisplay = ({products}) => {
@@ -64,9 +64,9 @@ const EquipmentDisplay = ({products}) => {
                   />
                 </td>
                 <td className="px-6 py-4 text-sm border-t">
-                  <button className="px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200 shadow-md">
+                  <Link to={`/view-details/${equipment._id}`}><button className="px-4 py-2 text-sm font-semibold bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200 shadow-md">
                     View Details
-                  </button>
+                  </button></Link>
                 </td>
               </tr>
             ))}
