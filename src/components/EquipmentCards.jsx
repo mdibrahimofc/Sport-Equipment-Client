@@ -4,7 +4,7 @@ import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 
-const EquipmentCards = ({ equipmentList, setRender, render }) => {
+const EquipmentCards = ({ equipmentList, setRender, render, loading }) => {
     const hanleDelete = (id) => {
         console.log(id);
         swal({
@@ -39,7 +39,13 @@ const EquipmentCards = ({ equipmentList, setRender, render }) => {
           My Equipment List
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          loading ? <div className="flex justify-center items-center">
+          <span className="loading loading-dots loading-xs"></span>
+          <span className="loading loading-dots loading-sm"></span>
+          <span className="loading loading-dots loading-md"></span>
+          <span className="loading loading-dots loading-lg"></span>
+        </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {equipmentList.map((equipment, index) => (
             <Zoom key={equipment._id} delay={index * 100} >
                 <div
@@ -102,6 +108,9 @@ const EquipmentCards = ({ equipmentList, setRender, render }) => {
             
           ))}
         </div>
+        }
+
+        
       </div>
     </section>
   );

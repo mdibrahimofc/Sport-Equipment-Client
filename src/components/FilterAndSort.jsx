@@ -1,6 +1,6 @@
 import React from "react";
 
-const FilterAndSort = () => {
+const FilterAndSort = ({setProducts}) => {
   const handleSort = (e)=> {
     e.preventDefault()
     const form = e.target
@@ -13,6 +13,15 @@ const FilterAndSort = () => {
     .then(res=> res.json())
     .then(data=> {
       console.log(data);
+      setProducts(data)
+    })
+    }
+    if(price === "High to Low"){
+      fetch("https://equi-sports-server-chi.vercel.app/filter/descending")
+    .then(res=> res.json())
+    .then(data=> {
+      console.log(data);
+      setProducts(data)
     })
     }
   }
@@ -40,7 +49,6 @@ const FilterAndSort = () => {
 
       <div class="w-full md:w-1/4">
         <select name="price" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
-          <option value="">Sort by Price</option>
           <option value="low-to-high">Price: Low to High</option>
           <option value="high-to-low">Price: High to Low</option>
         </select>

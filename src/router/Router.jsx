@@ -35,7 +35,6 @@ export const router = createBrowserRouter([
             {
                 path: "all-sports-equipments",
                 element: <AllEquipments/>,
-                loader: ()=> fetch("https://equi-sports-server-chi.vercel.app/all-equipments")
             },
             {
                 path: "my-equipments-list",

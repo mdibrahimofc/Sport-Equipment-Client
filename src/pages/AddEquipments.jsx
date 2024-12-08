@@ -11,7 +11,7 @@ const AddEquipments = () => {
         const photo = form.photo.value;
         const itemName = form.itemName.value;
         const description = form.description.value;
-        const price = form.price.value;
+        const price = +form.price.value;
         const rating = form.rating.value;
         const customization = form.customization.value;
         const processingTime =form.processingTime.value;

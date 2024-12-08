@@ -2,8 +2,7 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
-const EquipmentDisplay = () => {
-  const allEquipments = useLoaderData();
+const EquipmentDisplay = ({products}) => {
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-4xl font-extrabold text-center mb-6 text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
@@ -33,7 +32,7 @@ const EquipmentDisplay = () => {
             </tr>
           </thead>
           <tbody>
-            {allEquipments.map((equipment, index) => (
+            {products.map((equipment, index) => (
               <tr
                 key={index}
                 className={`${
@@ -41,6 +40,7 @@ const EquipmentDisplay = () => {
                 } hover:bg-gray-100 transition duration-200`}
               >
                 <td className="px-6 py-4 text-sm border-t">{index + 1}</td>
+                <td className="px-6 py-4 text-sm border-t"><img src={equipment.photo} alt={equipment.itemName} className="w-20 object-cover" /></td>
                 <td className="px-6 py-4 text-sm font-medium border-t">
                   {equipment.itemName}
                 </td>
