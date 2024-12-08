@@ -8,32 +8,13 @@ const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const [dark, setDark] = useState(false);
 
-  const htmlElement = document.documentElement;
-  const theme = localStorage.getItem("theme")
-  console.log(theme);
-  useEffect(()=>{
-    
-    if(theme === null){
-      return localStorage.setItem("theme", "light")
-    }
-    htmlElement.setAttribute("data-theme", theme);
 
-
-
-
-    
-  },[theme])
-
-  const handleTheme = () => {
  
-    setDark(!dark)
-    if(theme === 'dark'){
 
-      localStorage.setItem("theme", "light");
-    }
-    else if(theme === "light"){
-      localStorage.setItem("theme", "dark");
-    }
+
+  const darkModeHandler= () => {
+    setDark(!dark);
+    document.body.classList.toggle("dark");
   }
   const links = (
     <>
@@ -60,7 +41,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-blue-400 pb-10">
+    <div className="navbar bg-blue-400 dark:bg-blue-700 pb-10">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -94,7 +75,7 @@ const Navbar = () => {
       <div className="navbar-end items-center">
         <div className="mr-4 mt-2 flex items-center gap-1">
           <p className="font-medium">{dark ? "Dark Mode" : "Light Mode"}</p>
-        <input onClick={handleTheme} type="checkbox" className="toggle" checked={theme === "dark"} />
+        <input onClick={darkModeHandler} type="checkbox" className="toggle" checked={dark} />
         </div>
         {user ? (
           <div data-tooltip-id="my-tooltip" data-tooltip-content={user?.displayName} className="flex items-center justify-center gap-2">

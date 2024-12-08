@@ -42,7 +42,7 @@ const ProductsSection = () => {
                 alt={product.name}
                 className="w-full h-48 object-cover rounded-md"
               />
-              <h3 className="text-lg font-semibold mt-4">{product.itemName}</h3>
+              <h3 className="text-lg font-semibold dark:text-white mt-4">{product.itemName}</h3>
               <p className="text-gray-500 dark:text-gray-400">
                 ${product.price}
               </p>

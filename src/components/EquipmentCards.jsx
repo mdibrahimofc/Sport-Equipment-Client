@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Zoom } from "react-awesome-reveal";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
-const EquipmentCards = ({ equipmentList }) => {
+const EquipmentCards = ({ equipmentList, setRender, render }) => {
+    const hanleDelete = (id) => {
+        console.log(id);
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure that you want to delete this product?",
+            icon: "warning",
+            dangerMode: true,
+          })
+          .then(willDelete => {
+            if (willDelete) {
+                
+                fetch(`http://localhost:5000/delete/${id}`, {
+                    method: "DELETE"
+                })
+                .then(res=> res.json())
+                .then(data => {
+                    console.log(data);
+                    if(data.deletedCount > 0){
+                        swal("Deleted!", "Your product has been deleted!", "success");
+                        setRender(!render)
+                    }else{
+                        swal("Ooops!", "something went wrong");
+                    }
+                })
+            }
+          });
+    }
   return (
-    <section className="py-10 bg-gray-100 dark:bg-gray-900">
+    <section className="py-10 bg-gray-100 dark:bg-gray-950">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-8">
           My Equipment List
@@ -14,7 +43,7 @@ const EquipmentCards = ({ equipmentList }) => {
           {equipmentList.map((equipment, index) => (
             <Zoom key={equipment._id} delay={index * 100} >
                 <div
-              className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition duration-300"
+              className="bg-white dark:bg-gray-700 shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition duration-300"
             >
               {/* Image */}
               <img
@@ -52,15 +81,17 @@ const EquipmentCards = ({ equipmentList }) => {
               {/* Buttons */}
               <div className="p-4 flex justify-between items-center">
 
+                <Link to={`/update-equipments/${equipment._id}`}>
                 <button
                 //   onClick={() => onUpdate(equipment.id)}
                   className="bg-green-500 text-white px-3 py-2 rounded-md shadow hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700"
                 >
                   Update
                 </button>
+                </Link>
 
                 <button
-                //   onClick={() => onDelete(equipment.id)}
+                  onClick={() => hanleDelete(equipment._id)}
                   className="bg-red-500 text-white px-3 py-2 rounded-md shadow hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
                 >
                   Delete

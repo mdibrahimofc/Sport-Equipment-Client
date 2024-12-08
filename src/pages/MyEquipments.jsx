@@ -6,6 +6,7 @@ import EquipmentCards from "../components/EquipmentCards";
 const MyEquipments = () => {
     const [myEquipments, setMyEquipments] = useState([])
     const {user} = useContext(AuthContext)
+    const [render, setRender] = useState(false)
     console.log(user);
     useEffect(()=>{
         fetch(`http://localhost:5000/my-equipments${user?.email}`)
@@ -14,11 +15,11 @@ const MyEquipments = () => {
             console.log(data);
             setMyEquipments(data)
         })
-    },[user])
+    },[user, render])
   return (
     <div>
       <Header/>
-      <EquipmentCards equipmentList={myEquipments}/>
+      <EquipmentCards render={render} setRender={setRender} equipmentList={myEquipments}/>
     </div>
 
   );

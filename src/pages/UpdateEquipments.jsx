@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../firebase/AuthProvider";
 import swal from "sweetalert";
+import { useLoaderData, useParams } from "react-router-dom";
 
-const AddEquipments = () => {
+const UpdateEquipments = () => {
   const {user} = useContext(AuthContext)
-    console.log(user);
+    const {id} = useParams()
+    
+    const AllEquipments = useLoaderData()
+    const requireProducts = AllEquipments.find(e => e._id === id)
+
+    const {photo, categoryName, itemName, description, price, rating, customization, processingTime, stockStatus, userName, userEmail} = requireProducts
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -20,8 +27,8 @@ const AddEquipments = () => {
         const userName = form.userName.value;
         const userEmail = form.userEmail.value;
         const newEquipment = {photo, categoryName, itemName, description, price, rating, customization, processingTime, stockStatus, userName, userEmail};
-        fetch('http://localhost:5000/add-equipments', {
-      method: "POST",
+        fetch(`http://localhost:5000/update/${id}`, {
+      method: "PATCH",
       headers: {
         'content-type': 'application/json'
       },
@@ -30,7 +37,7 @@ const AddEquipments = () => {
     .then(res => res.json())
     .then(data => {
       console.log(data);
-      swal("Product added successfully")
+      swal("Product updated successfully")
       form.reset()
     })
     .catch(err=> swal("Ooopss! something wrong, products doesn't add"))
@@ -38,11 +45,10 @@ const AddEquipments = () => {
   return (
     <div className="my-8">
       <p className="text-center text-cyan-500 text-2xl md:text-3xl lg:text-4xl font-bold">
-        Add New <br />
-        Sports Equipment
+      Update Your <br /> Sports Equipment
       </p>
       <p className="text-sky-400 text-center my-2 md:text-2xl font-semibold">
-        Enter the Details to Add a New Sports Equipment to the Store
+      Make changes to your product details and keep your inventory up-to-date effortlessly.
       </p>
       <div className="w-4/5 mx-auto p-6 bg-base-200 rounded-md shadow-md">
         <h1 className="text-3xl font-bold mb-4 text-center">
@@ -57,9 +63,9 @@ const AddEquipments = () => {
             <input
               type="text"
               name="photo"
+              defaultValue={photo}
               placeholder="Enter the image URL"
               className="input input-bordered w-full"
-              required
             />
           </div>
 
@@ -71,9 +77,9 @@ const AddEquipments = () => {
             <input
               type="text"
               name="itemName"
+              defaultValue={itemName}
               placeholder="Enter item name"
               className="input input-bordered w-full"
-              required
             />
           </div>
 
@@ -85,9 +91,9 @@ const AddEquipments = () => {
             <input
               type="text"
               name="categoryName"
+              defaultValue={categoryName}
               placeholder="Enter category name"
               className="input input-bordered w-full"
-              required
             />
           </div>
 
@@ -98,6 +104,7 @@ const AddEquipments = () => {
             </label>
             <textarea
               name="description"
+              defaultValue={description}
               placeholder="Enter a description"
               className="textarea textarea-bordered w-full"
             />
@@ -111,9 +118,9 @@ const AddEquipments = () => {
             <input
               type="number"
               name="price"
+              defaultValue={price}
               placeholder="Enter price"
               className="input input-bordered w-full"
-              required
             />
           </div>
 
@@ -124,8 +131,8 @@ const AddEquipments = () => {
             </label>
             <select
               name="rating"
+              defaultValue={rating}
               className="select select-bordered w-full"
-              required
             >
               <option disabled value="">
                 Select rating
@@ -146,6 +153,7 @@ const AddEquipments = () => {
             <input
               type="text"
               name="customization"
+              defaultValue={customization}
               placeholder="Enter customization options"
               className="input input-bordered w-full"
             />
@@ -159,6 +167,7 @@ const AddEquipments = () => {
             <input
               type="text"
               name="processingTime"
+              defaultValue={processingTime}
               placeholder="Enter delivery time (e.g., 3-5 days)"
               className="input input-bordered w-full"
             />
@@ -172,9 +181,9 @@ const AddEquipments = () => {
             <input
               type="number"
               name="stockStatus"
+              defaultValue={stockStatus}
               placeholder="Enter stock quantity"
               className="input input-bordered w-full"
-              required
             />
           </div>
 
@@ -214,4 +223,4 @@ const AddEquipments = () => {
   );
 };
 
-export default AddEquipments;
+export default UpdateEquipments;

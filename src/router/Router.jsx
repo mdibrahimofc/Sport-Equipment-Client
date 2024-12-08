@@ -8,6 +8,7 @@ import AddEquipments from "../pages/AddEquipments";
 import Error from "../pages/Error";
 import AllEquipments from "../pages/AllEquipments";
 import MyEquipments from "../pages/MyEquipments";
+import UpdateEquipments from "../pages/UpdateEquipments";
 
 export const router = createBrowserRouter([
     {
@@ -38,7 +39,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: "my-equipments-list",
-                element: <MyEquipments/>
+                element: <PrivateRoute><MyEquipments/></PrivateRoute>
+            },
+            {
+                path: "update-equipments/:id",
+                element: <PrivateRoute><UpdateEquipments/></PrivateRoute>,
+                loader: () => fetch("http://localhost:5000/all-equipments")
             }
         ]
     }
