@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
-const EquipmentDisplay = ({products}) => {
+const EquipmentDisplay = ({products, loading}) => {
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-4xl font-extrabold text-center mb-6 text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
@@ -31,7 +31,13 @@ const EquipmentDisplay = ({products}) => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          {
+            loading ?  <div className="flex justify-center items-center">
+            <span className="loading loading-dots loading-xs"></span>
+            <span className="loading loading-dots loading-sm"></span>
+            <span className="loading loading-dots loading-md"></span>
+            <span className="loading loading-dots loading-lg"></span>
+          </div> : <tbody>
             {products.map((equipment, index) => (
               <tr
                 key={index}
@@ -71,6 +77,7 @@ const EquipmentDisplay = ({products}) => {
               </tr>
             ))}
           </tbody>
+          }
         </table>
       </div>
     </div>
