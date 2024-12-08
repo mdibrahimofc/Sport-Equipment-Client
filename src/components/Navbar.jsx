@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../firebase/AuthProvider";
 import { Tooltip } from 'react-tooltip'
+import "../Navlinkstyle.css"
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -37,22 +38,22 @@ const Navbar = () => {
   const links = (
     <>
       <NavLink to="/">
-        <li className=" border-lime-300 dark:border-blue-800 border-2 rounded-full text-xl mr-2 font-medium">
+        <li className="text-xl mr-2 font-medium">
           Home
         </li>
       </NavLink>
       <NavLink to="/all-sports-equipments">
-        <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+        <li className="text-xl mr-2 font-medium">
           All Sports Equipment
         </li>
       </NavLink>
       <NavLink to="/add-equipments">
-        <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+        <li className="text-xl mr-2 font-medium">
           Add Equipment
         </li>
       </NavLink>
       <NavLink to="/my-equipments-list">
-        <li className=" border-lime-300 border-2 rounded-full text-xl mr-2 font-medium">
+        <li className="text-xl mr-2 font-medium">
           My Equipment List
         </li>
       </NavLink>

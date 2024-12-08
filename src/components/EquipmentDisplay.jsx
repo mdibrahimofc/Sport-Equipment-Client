@@ -49,7 +49,6 @@ const EquipmentDisplay = () => {
                 <td className="px-6 py-4 text-sm border-t">
                   {equipment.price}
                 </td>
-                {/* <td className="px-6 py-4 text-sm border-t">⭐⭐⭐⭐☆</td> */}
                 <td className="px-6 py-4 text-sm border-t">
                   <ReactStars
                     count={5}
