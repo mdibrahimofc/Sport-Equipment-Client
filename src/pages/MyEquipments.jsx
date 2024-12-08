@@ -21,7 +21,7 @@ const MyEquipments = () => {
     },[user, render])
   return (
     <div>
-      <Header/>
+      <Header />
       <EquipmentCards loading={loading} render={render} setRender={setRender} equipmentList={myEquipments}/>
     </div>
 

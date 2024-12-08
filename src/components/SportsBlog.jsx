@@ -57,7 +57,7 @@ const SportsBlog = () => {
       
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 dark:bg-gray-800">
       <section className="py-12 w-10/12 mx-auto bg-gray-100 dark:bg-gray-800">
         <div className="container mx-auto text-center mb-10">
           <h2 className="text-3xl font-semibold text-gray-800 dark:text-white">
