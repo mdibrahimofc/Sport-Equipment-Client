@@ -14,6 +14,7 @@ const Login = () => {
     login(email, password)
     .then(res=> {
         console.log(res.user);
+        swal("You have logged successfully")
     })
     .catch(err=> {
         swal("Email or password didn't match")
