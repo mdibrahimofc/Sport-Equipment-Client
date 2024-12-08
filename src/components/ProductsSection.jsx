@@ -6,7 +6,7 @@ const ProductsSection = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/equipment")
+    fetch("https://equi-sports-server-chi.vercel.app/equipment")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

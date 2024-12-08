@@ -9,7 +9,7 @@ const FilterAndSort = () => {
     // const sport = form.sport.value;
     // const filter = {price, sport}
     if(price === "low-to-high"){
-      fetch("http://localhost:5000/filter/ascending")
+      fetch("https://equi-sports-server-chi.vercel.app/filter/ascending")
     .then(res=> res.json())
     .then(data=> {
       console.log(data);

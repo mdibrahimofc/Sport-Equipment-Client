@@ -20,7 +20,7 @@ const AddEquipments = () => {
         const userName = form.userName.value;
         const userEmail = form.userEmail.value;
         const newEquipment = {photo, categoryName, itemName, description, price, rating, customization, processingTime, stockStatus, userName, userEmail};
-        fetch('http://localhost:5000/add-equipments', {
+        fetch('https://equi-sports-server-chi.vercel.app/add-equipments', {
       method: "POST",
       headers: {
         'content-type': 'application/json'

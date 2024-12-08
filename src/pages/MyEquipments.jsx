@@ -9,7 +9,7 @@ const MyEquipments = () => {
     const [render, setRender] = useState(false)
     console.log(user);
     useEffect(()=>{
-        fetch(`http://localhost:5000/my-equipments${user?.email}`)
+        fetch(`https://equi-sports-server-chi.vercel.app/my-equipments${user?.email}`)
         .then(res=> res.json())
         .then(data=> {
             console.log(data);

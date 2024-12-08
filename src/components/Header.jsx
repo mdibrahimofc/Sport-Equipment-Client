@@ -24,7 +24,7 @@ const Header = ({ onSort, onSearch }) => {
       <div className="container mx-auto flex flex-wrap justify-between items-center">
         {/* Title */}
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
-          All Sports Equipment
+          My Sports Equipment
         </h1>
 
         {/* Search Bar */}

@@ -18,7 +18,8 @@ const UpdateEquipments = () => {
         const photo = form.photo.value;
         const itemName = form.itemName.value;
         const description = form.description.value;
-        const price = form.price.value;
+        const price = +form.price.value;
+        console.log(typeof price);
         const rating = form.rating.value;
         const customization = form.customization.value;
         const processingTime =form.processingTime.value;
@@ -27,7 +28,7 @@ const UpdateEquipments = () => {
         const userName = form.userName.value;
         const userEmail = form.userEmail.value;
         const newEquipment = {photo, categoryName, itemName, description, price, rating, customization, processingTime, stockStatus, userName, userEmail};
-        fetch(`http://localhost:5000/update/${id}`, {
+        fetch(`https://equi-sports-server-chi.vercel.app/update/${id}`, {
       method: "PATCH",
       headers: {
         'content-type': 'application/json'
@@ -215,7 +216,7 @@ const UpdateEquipments = () => {
 
           {/* Submit Button */}
           <div className="form-control mt-6 col-span-2">
-            <input className="btn btn-primary hover:bg-blue-700" value={'Add Equipment'} type="submit"/>
+            <input className="btn btn-primary hover:bg-blue-700" value={'Update Equipment'} type="submit"/>
           </div>
         </form>
       </div>

@@ -16,7 +16,7 @@ const EquipmentCards = ({ equipmentList, setRender, render }) => {
           .then(willDelete => {
             if (willDelete) {
                 
-                fetch(`http://localhost:5000/delete/${id}`, {
+                fetch(`https://equi-sports-server-chi.vercel.app/delete/${id}`, {
                     method: "DELETE"
                 })
                 .then(res=> res.json())

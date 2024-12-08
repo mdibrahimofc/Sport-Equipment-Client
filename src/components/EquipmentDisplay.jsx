@@ -14,6 +14,7 @@ const EquipmentDisplay = () => {
           <thead>
             <tr className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
               <th className="px-6 py-3 text-left text-sm font-semibold">#</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold">Image</th>
               <th className="px-6 py-3 text-left text-sm font-semibold">
                 Equipment Name
               </th>

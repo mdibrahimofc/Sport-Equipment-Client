@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
             {
                 path: "all-sports-equipments",
                 element: <AllEquipments/>,
-                loader: ()=> fetch("http://localhost:5000/all-equipments")
+                loader: ()=> fetch("https://equi-sports-server-chi.vercel.app/all-equipments")
             },
             {
                 path: "my-equipments-list",
@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
             {
                 path: "update-equipments/:id",
                 element: <PrivateRoute><UpdateEquipments/></PrivateRoute>,
-                loader: () => fetch("http://localhost:5000/all-equipments")
+                loader: () => fetch("https://equi-sports-server-chi.vercel.app/all-equipments")
             }
         ]
     }
