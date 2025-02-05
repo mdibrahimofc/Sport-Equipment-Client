@@ -1,6 +1,6 @@
 # EquiSports - Sports Equipment Online Store
 
-![Homepage Screenshot](https://i.ibb.co.com/mFPXjcNq/Screenshot-2025-02-05-154051.png)
+![Homepage Screenshot](https://i.ibb.co.com/pvqrY6bc/Screenshot-2025-02-05-154051.png)
 
 Welcome to **EquiSports**, your go-to online platform for purchasing top-quality sports equipment and accessories. Our platform allows customers to browse, purchase, and review a wide range of sports products. Whether you're into football, basketball, tennis, or any other sport, we've got the right gear for you!
 
