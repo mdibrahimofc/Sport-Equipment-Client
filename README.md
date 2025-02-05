@@ -42,7 +42,10 @@ The **EquiSports** website provides several key features:
   - `models/`: MongoDB models for sports equipment data
   - `routes/`: API routes for handling equipment, user, and authentication operations
  
-  - ```json
+## 📦 Dependencies
+This project includes the following dependencies:
+
+```json
 "dependencies": {
   "@404pagez/react": "^0.1.1",
   "@emotion/react": "^11.13.5",
